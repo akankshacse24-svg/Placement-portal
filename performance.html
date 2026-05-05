@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Performance Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="navbar">
+
+<div class="menu-icon" onclick="toggleMenu()">☰</div>
+<div class="logo">Placement Portal</div>
+<div class="profile-icon" onclick="toggleProfile()">👤</div>
+
+</div>
+
+<div id="menuDropdown" class="dropdown-menu">
+<a href="/">Home</a>
+<a href="/dashboard">Dashboard</a>
+<a href="/quiz">Quiz</a>
+<a href="/interview">Interview</a>
+<a href="/companies">Companies</a>
+<a href="/resume">Resume Analyzer</a>
+<a href="/performance">Performance</a>
+</div>
+
+<div id="profileDropdown" class="dropdown-profile">
+<a href="/profile">My Profile</a>
+<a href="/logout">Logout</a>
+</div>
+
+<div class="box">
+
+<h1>Student Performance Dashboard</h1>
+
+<canvas id="myChart"></canvas>
+
+<div class="cards">
+
+<div class="card">
+<h2>{{ average }}</h2>
+<p>Average Score</p>
+</div>
+
+<div class="card">
+<h2>{{ highest }}</h2>
+<p>Highest Score</p>
+</div>
+
+<div class="card">
+<h2>{{ lowest }}</h2>
+<p>Lowest Score</p>
+</div>
+
+<div class="card">
+<h2>{{ trend }}</h2>
+<p>Performance Trend</p>
+</div>
+
+<div class="card">
+<h2>{{ readiness }}%</h2>
+<p>Placement Readiness</p>
+</div>
+
+<div class="card">
+<h2>{{ status }}</h2>
+<p>Status</p>
+</div>
+
+</div>
+
+<div class="suggestions">
+<h2 style="color:#764ba2;">AI Suggestions</h2>
+
+{% for tip in suggestions %}
+<p>✔ {{ tip }}</p>
+{% endfor %}
+
+</div>
+
+</div>
+
+<script>
+window.onload = function () {
+
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+type: 'bar',
+
+data: {
+labels: ['Test1','Test2','Test3','Test4','Test5'],
+datasets: [{
+label: 'Quiz Scores',
+data: JSON.parse('{{ scores | tojson | safe }}'),
+backgroundColor: [
+'#667eea',
+'#764ba2',
+'#ff7b54',
+'#00b894',
+'#fdcb6e'
+],
+borderRadius: 8
+}]
+},
+
+options: {
+responsive: true,
+scales: {
+y: {
+beginAtZero: true,
+max: 10
+}
+}
+}
+
+});
+
+};
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Aptitude Quiz</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <!-- Left Menu -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="logo">Placement Portal</div>
+
+    <!-- Right Profile -->
+    <div class="profile-icon" onclick="toggleProfile()">👤</div>
+
+</div>
+
+<!-- Left Dropdown -->
+<div id="menuDropdown" class="dropdown-menu">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/quiz">Quiz</a>
+    <a href="/interview">Interview</a>
+    <a href="/companies">Companies</a>
+    <a href="/resume">Resume Analyzer</a>
+    <a href="/performance">Performance</a>
+</div>
+
+<!-- Right Profile Dropdown -->
+<div id="profileDropdown" class="dropdown-profile">
+    <a href="/profile">My Profile</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<h2>Aptitude Quiz</h2>
+<form method="POST" action="/submit_quiz">
+{% for q in questions %}
+<div class="question">
+
+<p>{{ q[1] }}</p>
+
+<div class="option">
+    <label>
+        <input type="radio" name="q{{ q[0] }}" value="{{ q[2] }}">
+        <span>{{ q[2] }}</span>
+    </label>
+</div>
+
+<div class="option">
+    <label>
+        <input type="radio" name="q{{ q[0] }}" value="{{ q[3] }}">
+        <span>{{ q[3] }}</span>
+    </label>
+</div>
+
+<div class="option">
+    <label>
+        <input type="radio" name="q{{ q[0] }}" value="{{ q[4] }}">
+        <span>{{ q[4] }}</span>
+    </label>
+</div>
+
+<div class="option">
+    <label>
+        <input type="radio" name="q{{ q[0] }}" value="{{ q[5] }}">
+        <span>{{ q[5] }}</span>
+    </label>
+</div>
+</div>
+
+{% endfor %}
+
+<button type="submit">Submit Quiz</button>
+</form>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

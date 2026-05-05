@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resume Analyzer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+
+    <!-- Left Menu -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+
+    <div class="logo">Placement Portal</div>
+
+    <!-- Right Profile -->
+    <div class="profile-icon" onclick="toggleProfile()">👤</div>
+
+</div>
+
+<!-- Left Dropdown -->
+<div id="menuDropdown" class="dropdown-menu">
+    <a href="/">Home</a>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/quiz">Quiz</a>
+    <a href="/interview">Interview</a>
+    <a href="/companies">Companies</a>
+    <a href="/resume">Resume Analyzer</a>
+    <a href="/performance">Performance</a>
+</div>
+
+<!-- Right Profile Dropdown -->
+<div id="profileDropdown" class="dropdown-profile">
+    <a href="/profile">My Profile</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<div class="box">
+
+<h1>Resume Analyzer</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input type="file" name="resume" required>
+
+<br><br>
+
+<button type="submit">Analyze Resume</button>
+
+</form>
+
+<br>
+
+<pre>{{ result }}</pre>
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
